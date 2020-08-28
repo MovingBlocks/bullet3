@@ -70,10 +70,9 @@ ATTRIBUTE_ALIGNED16(struct) btVector3i {
 
     SIMD_FORCE_INLINE unsigned int getHash() const
     {
-        int a = static_cast<unsigned int>(x & 0xff);
-        int b = static_cast<unsigned int>((y & 0xff) << 8);
-        int c = static_cast<unsigned int>((z & 0xff) << 16);
-        long int key = a + b + c;
+        long long int key = x;
+        key ^= (y << 17) | (y >> 16);
+        key ^= (z << 17) | (z >> 16);
 
         // Thomas Wang's hash
         key += ~(key << 15);
