@@ -656,8 +656,9 @@ void btCollisionWorld::rayTestSingleInternal(const btTransform& rayFromTrans, co
 											  &tmpOb,
 											  resultCallback);
 
-						// Early out if hit - need to consider this (what if user wants to go deeper)
-						break;
+                        if(resultCallback.hasHit()) {
+                            break;
+						}
 					}
 
 					int next;
